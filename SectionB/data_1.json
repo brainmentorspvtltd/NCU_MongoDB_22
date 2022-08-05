@@ -1,0 +1,40 @@
+[
+    {
+        "name" : "Aman",
+        "age" : 30,
+        "occupation" : "Employee",
+        "address" : "Rohini",
+        "gender" : "male"
+    },
+    {
+        "name" : "Pooja",
+        "age" : 31,
+        "address" : "Noida",
+        "gender" : "female"
+    },
+    {
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+            "house_no" : "B-121",
+            "apartment" : "XYZ",
+            "city" : "Rohini",
+            "state" : "Delhi",
+            "country" : "India"
+        },
+        "hobbies" : "cricket"
+    },
+    {
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+            "house_no" : "A-12",
+            "apartment" : "ABC",
+            "city" : "Shadra",
+            "state" : "Delhi",
+            "country" : "India"
+        },
+        "hobbies" : ["football", "tennis", "cricket"]
+    }
+]

@@ -1,0 +1,596 @@
+Types of data
+- Structured - Tabular format- excel / csv / tsv
+- Unstructured - Images / audio / video / raw text
+- Semi-Structured - XML / JSON
+
+Types of NoSQL DB
+- Key Value Pair Based
+   - Data is stored in key and value pair...
+   - it is popular for storage like hashtables
+   - data could be in JSON / BSON
+   - redis, dynamo DB, Riak
+- Column Oriented
+   - data is stored in columns and we have some column family for each row and that column family contains key value pairs
+   - based on google big table
+   - HBase and Cassandra
+- Document Oriented
+   - collection of documents
+   - data is stored in key and value and here value could be another document
+   - MongoDB
+- Graph Based
+   - Graph Based databases are inspired from graph data structure
+--------------------------------------------------------
+MongoDB
+- document oriented NoSQL database
+- used for high volume data storage
+- instead of tables we create collections that contains data in key and value pair
+- collections contains set of documents
+---------------------------------------------------
+MongoDB drivers are written on C++
+MongoDB enhance performance based on load of data
+if the load increases by adding more nodes (computers) the performance can be retained
+--------------------------------------------------
+Databases
+- show dbs;
+- use dbname;
+   - if database doesn't exist than it creates a new database and switch to that
+   - if database already exists than it simply switches to that database
+
+---------------------------------------
+Collections
+- show collections;
+- db.createCollection(name, options)
+  options : 
+  - capped - true / flase
+  - max - 10 : only 10 documents are allowed
+  - size - size in bytes
+  - AutoIndexId - automatically creates index on ID field
+-------------------------------------------------------
+Data Types in MongoDB
+- Integer
+- Double
+- String
+- Boolean
+- Arrays
+- Object
+- Binary
+- Javascript
+- Date and TimeStamp
+======================================
+CRUD Operations - Create Read Update Delete
+create - insert / insertOne / insertMany
+read - find / findOne
+update - updateOne / updateMany / replaceOne / findOneAndUpdate
+delete - deleteOne / deleteMany / remove
+--------------------------------------------------------------------
+Query Selectors & Projection Operators
+
+Query Selectors
+- Comparison
+- Array
+- Logical
+- Element
+- Comments
+--------------------------------------------------------------------
+Projections Operators
+$
+$elemMatch
+$meta
+$slice
+--------------------------------------------------------------------
+Comparison Operators
+- $eq
+- $gt
+- $lt
+- $gte
+- $lte
+- $in
+- $ne
+- $nin
+--------------------------------------------------------------------
+Logical Operators
+- $and
+- $or
+- $not
+- $nor
+--------------------------------------------------------------------
+Element Operators
+- $exists
+- $type
+--------------------------------------------------------------------
+Evaluation Operators
+- $expr
+- $regex
+- jsonSchema
+- $where
+
+-----------------------------------------
+Codes
+-----------------------------------------
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+my_db   0.000GB
+ncu_db  0.000GB
+> db.createCollection("customers");
+{ "ok" : 1 }
+> show collections;
+customers
+> explain customers;
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:8
+> db.customers.explain()
+Explainable(ncu_db_b.customers)
+> db.customers.insertOne({"name":"Ram", "age":34, "email" : "ram12@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62ecb97fd48a074a75829dc4")
+}
+> db.customers.insertOne({"name":"Shyam", "age":24, "email" : "shyam11@gmail.com", "gender":"m"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62ecb9a3d48a074a75829dc5")
+}
+> db.customers.insertOne({"name":"Mohit", "age":54, "email" : "mmohit@gmail.com", "gender":"m", address:"Delhi"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62ecb9c4d48a074a75829dc6")
+}
+> db.customers.find()
+{ "_id" : ObjectId("62ecb97fd48a074a75829dc4"), "name" : "Ram", "age" : 34, "email" : "ram12@gmail.com" }
+{ "_id" : ObjectId("62ecb9a3d48a074a75829dc5"), "name" : "Shyam", "age" : 24, "email" : "shyam11@gmail.com", "gender" : "m" }
+{ "_id" : ObjectId("62ecb9c4d48a074a75829dc6"), "name" : "Mohit", "age" : 54, "email" : "mmohit@gmail.com", "gender" : "m", "address" : "Delhi" }
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com"
+}
+{
+        "_id" : ObjectId("62ecb9a3d48a074a75829dc5"),
+        "name" : "Shyam",
+        "age" : 24,
+        "email" : "shyam11@gmail.com",
+        "gender" : "m"
+}
+{
+        "_id" : ObjectId("62ecb9c4d48a074a75829dc6"),
+        "name" : "Mohit",
+        "age" : 54,
+        "email" : "mmohit@gmail.com",
+        "gender" : "m",
+        "address" : "Delhi"
+}
+> db.customers.insertMany([
+...     {
+...         "name" : "Aman",
+...         "age" : 30,
+...         "occupation" : "Employee",
+...         "address" : "Rohini",
+...         "gender" : "male"
+...     },
+...     {
+...         "name" : "Pooja",
+...         "age" : 31,
+...         "address" : "Noida",
+...         "gender" : "female"
+...     }
+... ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62ecbd84d48a074a75829dc7"),
+                ObjectId("62ecbd84d48a074a75829dc8")
+        ]
+}
+> db.customers.findOne();
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com"
+}
+> db.customers.find({"name" : "Pooja"}).pretty()
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc8"),
+        "name" : "Pooja",
+        "age" : 31,
+        "address" : "Noida",
+        "gender" : "female"
+}
+> db.customers.update({"name":"Pooja"}, {$set : {age : 33}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.customers.find({"name" : "Pooja"}).pretty()
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc8"),
+        "name" : "Pooja",
+        "age" : 33,
+        "address" : "Noida",
+        "gender" : "female"
+}
+> db.customers.deleteOne({"name" : "Pooja"});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com"
+}
+{
+        "_id" : ObjectId("62ecb9a3d48a074a75829dc5"),
+        "name" : "Shyam",
+        "age" : 24,
+        "email" : "shyam11@gmail.com",
+        "gender" : "m"
+}
+{
+        "_id" : ObjectId("62ecb9c4d48a074a75829dc6"),
+        "name" : "Mohit",
+        "age" : 54,
+        "email" : "mmohit@gmail.com",
+        "gender" : "m",
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc7"),
+        "name" : "Aman",
+        "age" : 30,
+        "occupation" : "Employee",
+        "address" : "Rohini",
+        "gender" : "male"
+}
+> db.customers.insertMany([{
+...         "name" : "Rohit",
+...         "gender" : "male",
+...         "age" : 33,
+...         "address" : {
+...             "house_no" : "B-121",
+...             "apartment" : "XYZ",
+...             "city" : "Rohini",
+...             "state" : "Delhi",
+...             "country" : "India"
+...         },
+...         "hobbies" : "cricket"
+...     },
+...     {
+...         "name" : "Shivam",
+...         "gender" : "male",
+...         "address" : {
+...             "house_no" : "A-12",
+...             "apartment" : "ABC",
+...             "city" : "Shadra",
+...             "state" : "Delhi",
+...             "country" : "India"
+...         },
+...         "hobbies" : ["football", "tennis", "cricket"]
+...     }]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62ecc2eed48a074a75829dc9"),
+                ObjectId("62ecc2eed48a074a75829dca")
+        ]
+}
+> db.customers.find().count();
+6
+> db.customers.find()["name"];
+> db.customers.find({}, {name:1}).pretty();
+{ "_id" : ObjectId("62ecb97fd48a074a75829dc4"), "name" : "Ram" }
+{ "_id" : ObjectId("62ecb9a3d48a074a75829dc5"), "name" : "Shyam" }
+{ "_id" : ObjectId("62ecb9c4d48a074a75829dc6"), "name" : "Mohit" }
+{ "_id" : ObjectId("62ecbd84d48a074a75829dc7"), "name" : "Aman" }
+{ "_id" : ObjectId("62ecc2eed48a074a75829dc9"), "name" : "Rohit" }
+{ "_id" : ObjectId("62ecc2eed48a074a75829dca"), "name" : "Shivam" }
+> db.customers.find({}, {name:1, hobbies:1}).pretty();
+{ "_id" : ObjectId("62ecb97fd48a074a75829dc4"), "name" : "Ram" }
+{ "_id" : ObjectId("62ecb9a3d48a074a75829dc5"), "name" : "Shyam" }
+{ "_id" : ObjectId("62ecb9c4d48a074a75829dc6"), "name" : "Mohit" }
+{ "_id" : ObjectId("62ecbd84d48a074a75829dc7"), "name" : "Aman" }
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "hobbies" : "cricket"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.find({}, {name:1, hobbies:1, _id:0}).pretty();
+{ "name" : "Ram" }
+{ "name" : "Shyam" }
+{ "name" : "Mohit" }
+{ "name" : "Aman" }
+{ "name" : "Rohit", "hobbies" : "cricket" }
+{ "name" : "Shivam", "hobbies" : [ "football", "tennis", "cricket" ] }
+> db.customers.find().pretty();
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com"
+}
+{
+        "_id" : ObjectId("62ecb9a3d48a074a75829dc5"),
+        "name" : "Shyam",
+        "age" : 24,
+        "email" : "shyam11@gmail.com",
+        "gender" : "m"
+}
+{
+        "_id" : ObjectId("62ecb9c4d48a074a75829dc6"),
+        "name" : "Mohit",
+        "age" : 54,
+        "email" : "mmohit@gmail.com",
+        "gender" : "m",
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc7"),
+        "name" : "Aman",
+        "age" : 30,
+        "occupation" : "Employee",
+        "address" : "Rohini",
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+                "house_no" : "B-121",
+                "apartment" : "XYZ",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "cricket"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+                "house_no" : "A-12",
+                "apartment" : "ABC",
+                "city" : "Shadra",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.update({"name":"Aman"}, {$set : {hobbies : ["basketball", "cricket"]}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.customers.update({"name":"Ram"}, {$set : {hobbies : ["cricket", "chess"]}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.customers.find().pretty();
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com",
+        "hobbies" : [
+                "cricket",
+                "chess"
+        ]
+}
+{
+        "_id" : ObjectId("62ecb9a3d48a074a75829dc5"),
+        "name" : "Shyam",
+        "age" : 24,
+        "email" : "shyam11@gmail.com",
+        "gender" : "m"
+}
+{
+        "_id" : ObjectId("62ecb9c4d48a074a75829dc6"),
+        "name" : "Mohit",
+        "age" : 54,
+        "email" : "mmohit@gmail.com",
+        "gender" : "m",
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc7"),
+        "name" : "Aman",
+        "age" : 30,
+        "occupation" : "Employee",
+        "address" : "Rohini",
+        "gender" : "male",
+        "hobbies" : [
+                "basketball",
+                "cricket"
+        ]
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+                "house_no" : "B-121",
+                "apartment" : "XYZ",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "cricket"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+                "house_no" : "A-12",
+                "apartment" : "ABC",
+                "city" : "Shadra",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.find({name : "Ram"}).pretty();
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com",
+        "hobbies" : [
+                "cricket",
+                "chess"
+        ]
+}
+> db.customers.findOne({"name" : "Shivam"});
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+                "house_no" : "A-12",
+                "apartment" : "ABC",
+                "city" : "Shadra",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.findOne({"name" : "Shivam"}).hobbies;
+[ "football", "tennis", "cricket" ]
+> db.customers.findOne({"name" : "Shivam"}).hobbies[1];
+tennis
+> db.customers.find({address.country : "India"}).pretty();
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:26
+> db.customers.find({"address.country" : "India"}).pretty();
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+                "house_no" : "B-121",
+                "apartment" : "XYZ",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "cricket"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+                "house_no" : "A-12",
+                "apartment" : "ABC",
+                "city" : "Shadra",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.find({"gender" : {$eq : "male"}}).pretty();
+{
+        "_id" : ObjectId("62ecbd84d48a074a75829dc7"),
+        "name" : "Aman",
+        "age" : 30,
+        "occupation" : "Employee",
+        "address" : "Rohini",
+        "gender" : "male",
+        "hobbies" : [
+                "basketball",
+                "cricket"
+        ]
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+                "house_no" : "B-121",
+                "apartment" : "XYZ",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "cricket"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dca"),
+        "name" : "Shivam",
+        "gender" : "male",
+        "address" : {
+                "house_no" : "A-12",
+                "apartment" : "ABC",
+                "city" : "Shadra",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : [
+                "football",
+                "tennis",
+                "cricket"
+        ]
+}
+> db.customers.find({"age" : {$gt : 32}}).pretty();
+{
+        "_id" : ObjectId("62ecb97fd48a074a75829dc4"),
+        "name" : "Ram",
+        "age" : 34,
+        "email" : "ram12@gmail.com",
+        "hobbies" : [
+                "cricket",
+                "chess"
+        ]
+}
+{
+        "_id" : ObjectId("62ecb9c4d48a074a75829dc6"),
+        "name" : "Mohit",
+        "age" : 54,
+        "email" : "mmohit@gmail.com",
+        "gender" : "m",
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62ecc2eed48a074a75829dc9"),
+        "name" : "Rohit",
+        "gender" : "male",
+        "age" : 33,
+        "address" : {
+                "house_no" : "B-121",
+                "apartment" : "XYZ",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "cricket"
+}
+>
+
+
+
+
