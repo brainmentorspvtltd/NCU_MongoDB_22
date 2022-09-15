@@ -1,0 +1,274 @@
+No SQL Database
+- Not Only SQL
+
+Types of Data
+- Structured - Tabular format
+- Unstructured - Images, Audio, Video, Raw Text
+- Semi-Structured - JSON, XML
+  JSON - Javascript Object Notation
+  - data is in key and value pair : {key : value, key : value...}
+--------------------------------------------------------------------
+Features of NoSQL
+- Non-Relational
+  - We donot have tables
+  - works with self-contained aggregated BLOBS (Binary Large Object)
+  - doesn't required any normalization
+- Schema Free
+  - No pre-defined schema, if we want than we can create schema...
+- Simple API
+  - povides easy to use interfaces for storage and querying data
+- Distributed
+  - NoSQL databases can be executed in a distributed fashion
+-------------------------------------------------------
+Types of NoSQL Database
+- Key-Value pair based
+  - data is stored in key and value pair
+  - Ex : Dynamo DB, Redis
+- Column-Oriented
+  - column based databases works with columns and store data in key and value
+- Graph Based
+  - it follows graph data structures and used mostly in social networking sites and movie recommendations
+- Document-Oriented
+  - document oriented databases stores data in key and value pair
+  - collection of  documents
+  - data is stored in documents
+
+Create Database
+Create Collection
+db.createCollection(name, options)
+options : capped, size, AutoIndexId, max
+capped : boolean : if true then it creates fixed size collection
+size : max size in bytes
+max : max documents allowed in capped collection
+AutoIndexId : automatically create index on ID field
+
+Data Types in MongoDB
+- Integer
+- Double
+- Boolean
+- Arrays
+- String
+- Object
+- Binary
+- Javascript
+- Date / TimeStamp
+
+CRUD Operations - Create Read Update Delete
+Create
+- insert / insertOne / insertMany
+Read
+- find / findOne
+Update
+- updateOne / updateMany / replaceOne / findOneAndUpdate
+Delete
+- deleteOne / deleteMany / remove
+
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+my_db   0.000GB
+ncu_db  0.000GB
+> use ncu_db;
+switched to db ncu_db
+> show collections;
+customers
+users
+> db.createCollection("students");
+{ "ok" : 1 }
+> show collections;
+customers
+students
+users
+> db.students.insertOne({"name":"Ram","sem":5,"year":3,"address":"Delhi"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62eb74fad07021abcfd91ad4")
+}
+> db.students.insertOne({"name":"Sumit","sem":5,"year":3,"address":"Noida"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62eb7543d07021abcfd91ad5")
+}
+> db.students.insertOne({"name":"Pooja","sem":5,"year":3});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62eb7577d07021abcfd91ad6")
+}
+> db.students.insertOne({"name":"Ankur","sem":2,"year":1,"address":"Gzb","country":"India"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62eb75a0d07021abcfd91ad7")
+}
+> db.students.find();
+{ "_id" : ObjectId("62eb74fad07021abcfd91ad4"), "name" : "Ram", "sem" : 5, "year" : 3, "address" : "Delhi" }
+{ "_id" : ObjectId("62eb7543d07021abcfd91ad5"), "name" : "Sumit", "sem" : 5, "year" : 3, "address" : "Noida" }
+{ "_id" : ObjectId("62eb7577d07021abcfd91ad6"), "name" : "Pooja", "sem" : 5, "year" : 3 }
+{ "_id" : ObjectId("62eb75a0d07021abcfd91ad7"), "name" : "Ankur", "sem" : 2, "year" : 1, "address" : "Gzb", "country" : "India" }
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62eb74fad07021abcfd91ad4"),
+        "name" : "Ram",
+        "sem" : 5,
+        "year" : 3,
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62eb7543d07021abcfd91ad5"),
+        "name" : "Sumit",
+        "sem" : 5,
+        "year" : 3,
+        "address" : "Noida"
+}
+{
+        "_id" : ObjectId("62eb7577d07021abcfd91ad6"),
+        "name" : "Pooja",
+        "sem" : 5,
+        "year" : 3
+}
+{
+        "_id" : ObjectId("62eb75a0d07021abcfd91ad7"),
+        "name" : "Ankur",
+        "sem" : 2,
+        "year" : 1,
+        "address" : "Gzb",
+        "country" : "India"
+}
+> db.students.findOne().pretty();
+uncaught exception: TypeError: db.students.findOne(...).pretty is not a function :
+@(shell):1:1
+> db.students.findOne();
+{
+        "_id" : ObjectId("62eb74fad07021abcfd91ad4"),
+        "name" : "Ram",
+        "sem" : 5,
+        "year" : 3,
+        "address" : "Delhi"
+}
+> db.students.insertMany([
+...     {
+...         "name" : "Anish",
+...         "sem" : 4,
+...         "year" : 2,
+...         "address" : "Ghaziabad"
+...     },
+...     {
+...         "name" : "Shivam",
+...         "sem" : 6,
+...         "year" : 3,
+...         "address" : "Delhi"
+...     }
+... ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62eb7aced07021abcfd91ad8"),
+                ObjectId("62eb7aced07021abcfd91ad9")
+        ]
+}
+> db.students.updateOne({"name":"Ram"}, {$set : {sem : 6}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.students.findOne();
+{
+        "_id" : ObjectId("62eb74fad07021abcfd91ad4"),
+        "name" : "Ram",
+        "sem" : 6,
+        "year" : 3,
+        "address" : "Delhi"
+}
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62eb74fad07021abcfd91ad4"),
+        "name" : "Ram",
+        "sem" : 6,
+        "year" : 3,
+        "address" : "Delhi"
+}
+{
+        "_id" : ObjectId("62eb7543d07021abcfd91ad5"),
+        "name" : "Sumit",
+        "sem" : 5,
+        "year" : 3,
+        "address" : "Noida"
+}
+{
+        "_id" : ObjectId("62eb7577d07021abcfd91ad6"),
+        "name" : "Pooja",
+        "sem" : 5,
+        "year" : 3
+}
+{
+        "_id" : ObjectId("62eb75a0d07021abcfd91ad7"),
+        "name" : "Ankur",
+        "sem" : 2,
+        "year" : 1,
+        "address" : "Gzb",
+        "country" : "India"
+}
+{
+        "_id" : ObjectId("62eb7aced07021abcfd91ad8"),
+        "name" : "Anish",
+        "sem" : 4,
+        "year" : 2,
+        "address" : "Ghaziabad"
+}
+{
+        "_id" : ObjectId("62eb7aced07021abcfd91ad9"),
+        "name" : "Shivam",
+        "sem" : 6,
+        "year" : 3,
+        "address" : "Delhi"
+}
+> db.students.find({"sem" : 4}).pretty();
+{
+        "_id" : ObjectId("62eb7aced07021abcfd91ad8"),
+        "name" : "Anish",
+        "sem" : 4,
+        "year" : 2,
+        "address" : "Ghaziabad"
+}
+> db.students.find({"sem" : 3}).pretty();
+> db.students.find({"sem" : 5}).pretty();
+{
+        "_id" : ObjectId("62eb7543d07021abcfd91ad5"),
+        "name" : "Sumit",
+        "sem" : 5,
+        "year" : 3,
+        "address" : "Noida"
+}
+{
+        "_id" : ObjectId("62eb7577d07021abcfd91ad6"),
+        "name" : "Pooja",
+        "sem" : 5,
+        "year" : 3
+}
+> db.students.deleteOne({"name" : "Sumit"});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.students.find({"name" : "Sumit"}).pretty();
+> [
+...     {
+...         "name" : "Anish",
+...         "sem" : 4,
+...         "year" : 2,
+...         "address" : "Ghaziabad"
+...     },
+...     {
+...         "name" : "Shivam",
+...         "sem" : 6,
+...         "year" : 3,
+...         "address" : "Delhi"
+...     }
+... ][
+...     {
+...         "name" : "Anish",
+...         "sem" : 4,
+...         "year" : 2,
+...         "address" : "Ghaziabad"
+...     },
+...     {
+...         "name" : "Shivam",
+...         "sem" : 6,
+...         "year" : 3,
+...         "address" : "Delhi"
+...     }
+... ]);

@@ -1,0 +1,721 @@
+What is NoSQL ? Types of NoSQL
+- Key Value Based
+- Column Oriented
+- Document Oriented
+- Graph Based
+
+RDBMS vs NoSQL
+MySQL vs NoSQL
+
+CRUD - Create Read Update Delete
+- Create Collections / Capped Collection
+   - Insert Data - insert(), insertOne(), insertMany()
+- Read
+  - find(), findOne()
+- Update
+  - updateOne(filter, update), updateMany(), replaceOne(), findOneAndUpdate(), upsert()
+- Delete
+  - deleteOne(), deleteMany(), remove()
+
+Capped Collections
+- db.createCollection(name, options)
+
+Options
+- capped	- true - fixed size collection
+- size	- size in bytes
+- max	- size in integer - max number of documents allowed
+- AutoIndexId - automatically creates index on id_field
+
+Query Selectors
+- Projection Operators - $, $elemMatch, $meta, $slice
+- Comparison Operators - $eq, $gt, $gte, $lt, $lte, $ne, $in, $nin
+- Logical - $and, $or, $not, $nor
+- Element - $exists, $type
+- Evaluation - $expr, $mod, $text, $regex, $where, $jsonSchema
+
+Using forEach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> use ncu_db;
+switched to db ncu_db
+> show collections;
+customers
+students
+users
+> db.customers.find().coun();
+uncaught exception: TypeError: db.customers.find(...).coun is not a function :
+@(shell):1:1
+> db.customers.find().count();
+13
+> db.users.find().count();
+1
+> db.users.find();
+{ "_id" : ObjectId("626bb944e23f8d131291ae9c"), "user_id" : "ram12@gmail.com", "user_name" : "Ram", "user_pwd" : "ram1234", "age" : "30" }
+> db.users.findOne();
+{
+        "_id" : ObjectId("626bb944e23f8d131291ae9c"),
+        "user_id" : "ram12@gmail.com",
+        "user_name" : "Ram",
+        "user_pwd" : "ram1234",
+        "age" : "30"
+}
+> db.createCollection("movies", {capped : true, max:5});
+{
+        "ok" : 0,
+        "errmsg" : "the 'size' field is required when 'capped' is true",
+        "code" : 72,
+        "codeName" : "InvalidOptions"
+}
+> db.createCollection("movies", {capped : true, max:5, size:1024});
+{ "ok" : 1 }
+> db.movies.insertOne({"movie_name" : "Thor", "imdb_rating" : 7.8});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b1347d01e3c9bcfb4bdb")
+}
+> db.movies.insertOne({"movie_name" : "Ironman", "imdb_rating" : 8.2});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b13e7d01e3c9bcfb4bdc")
+}
+> db.movies.insertOne({"movie_name" : "Hulk", "imdb_rating" : 7.1});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b1477d01e3c9bcfb4bdd")
+}
+> db.movies.insertOne({"movie_name" : "Black Panther", "imdb_rating" : 8.8});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b1537d01e3c9bcfb4bde")
+}
+> db.movies.insertOne({"movie_name" : "Avengers", "imdb_rating" : 8.0});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b1697d01e3c9bcfb4bdf")
+}
+> db.movies.find().pretty();
+{
+        "_id" : ObjectId("6322b1347d01e3c9bcfb4bdb"),
+        "movie_name" : "Thor",
+        "imdb_rating" : 7.8
+}
+{
+        "_id" : ObjectId("6322b13e7d01e3c9bcfb4bdc"),
+        "movie_name" : "Ironman",
+        "imdb_rating" : 8.2
+}
+{
+        "_id" : ObjectId("6322b1477d01e3c9bcfb4bdd"),
+        "movie_name" : "Hulk",
+        "imdb_rating" : 7.1
+}
+{
+        "_id" : ObjectId("6322b1537d01e3c9bcfb4bde"),
+        "movie_name" : "Black Panther",
+        "imdb_rating" : 8.8
+}
+{
+        "_id" : ObjectId("6322b1697d01e3c9bcfb4bdf"),
+        "movie_name" : "Avengers",
+        "imdb_rating" : 8
+}
+> db.movies.find();
+{ "_id" : ObjectId("6322b1347d01e3c9bcfb4bdb"), "movie_name" : "Thor", "imdb_rating" : 7.8 }
+{ "_id" : ObjectId("6322b13e7d01e3c9bcfb4bdc"), "movie_name" : "Ironman", "imdb_rating" : 8.2 }
+{ "_id" : ObjectId("6322b1477d01e3c9bcfb4bdd"), "movie_name" : "Hulk", "imdb_rating" : 7.1 }
+{ "_id" : ObjectId("6322b1537d01e3c9bcfb4bde"), "movie_name" : "Black Panther", "imdb_rating" : 8.8 }
+{ "_id" : ObjectId("6322b1697d01e3c9bcfb4bdf"), "movie_name" : "Avengers", "imdb_rating" : 8 }
+> db.movies.insertOne({"movie_name" : "Avengers Endgame", "imdb_rating" : 8.9});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b19a7d01e3c9bcfb4be0")
+}
+> db.movies.find();
+{ "_id" : ObjectId("6322b13e7d01e3c9bcfb4bdc"), "movie_name" : "Ironman", "imdb_rating" : 8.2 }
+{ "_id" : ObjectId("6322b1477d01e3c9bcfb4bdd"), "movie_name" : "Hulk", "imdb_rating" : 7.1 }
+{ "_id" : ObjectId("6322b1537d01e3c9bcfb4bde"), "movie_name" : "Black Panther", "imdb_rating" : 8.8 }
+{ "_id" : ObjectId("6322b1697d01e3c9bcfb4bdf"), "movie_name" : "Avengers", "imdb_rating" : 8 }
+{ "_id" : ObjectId("6322b19a7d01e3c9bcfb4be0"), "movie_name" : "Avengers Endgame", "imdb_rating" : 8.9 }
+> db.createCollection("products");
+{ "ok" : 1 }
+> db.products.insertMany([
+...     {
+...         "name" : "Apple Iphone 13",
+...         "price" : 90000,
+...         "brand" : "Apple",
+...         "category" : "Electronics",
+...         "details" : {
+...             "front_camera" : "10 mp",
+...             "back_camera" : "30 mp",
+...             "ram" : "8 GB",
+...             "memory" : ["64 GB", "128 GB", "256 GB"],
+...             "color" : ["silver", "black", "gold", "gray"]
+...         },
+...         "vendors" : ["Istore", "Zstore", "Xstore"]
+...     },
+...
+...     {
+...         "name" : "Asus ROG Strix",
+...         "price" : 150000,
+...         "brand" : "Asus",
+...         "category" : "Electronics",
+...         "details" : {
+...             "ram" : ["16 GB", "32 GB"],
+...             "memory" : ["1 TB", "2 TB", "512 GB"],
+...             "color" : ["silver", "black", "gold", "gray"]
+...         },
+...         "vendors" : ["Y Store", "Asus Store"]
+...     },
+...
+...     {
+...         "name" : "Adidas Shoes",
+...         "price" : 4500,
+...         "brand" : "Adidas",
+...         "category" : "Shoes",
+...         "details" : {
+...             "size" : [7,8,9,10],
+...             "color" : ["silver", "black", "white", "gray"],
+...             "type" : ["sports", "sneakers"]
+...         }
+...     },
+...
+...     {
+...         "name" : "One Plus 10T",
+...         "price" : 50000,
+...         "brand" : "One Plus",
+...         "category" : "Electronics",
+...         "details" : {
+...             "front_camera" : "50 mp",
+...             "back_camera" : "80 mp",
+...             "ram" : ["8 GB", "4 GB"],
+...             "memory" : ["64 GB", "128 GB"],
+...             "color" : ["silver", "black", "gold", "gray"]
+...         },
+...         "vendors" : ["Istore", "Zstore", "Xstore"]
+...     }
+... ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6322b6e17d01e3c9bcfb4be1"),
+                ObjectId("6322b6e17d01e3c9bcfb4be2"),
+                ObjectId("6322b6e17d01e3c9bcfb4be3"),
+                ObjectId("6322b6e17d01e3c9bcfb4be4")
+        ]
+}
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be1"),
+        "name" : "Apple Iphone 13",
+        "price" : 90000,
+        "brand" : "Apple",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "10 mp",
+                "back_camera" : "30 mp",
+                "ram" : "8 GB",
+                "memory" : [
+                        "64 GB",
+                        "128 GB",
+                        "256 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be2"),
+        "name" : "Asus ROG Strix",
+        "price" : 150000,
+        "brand" : "Asus",
+        "category" : "Electronics",
+        "details" : {
+                "ram" : [
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "1 TB",
+                        "2 TB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Y Store",
+                "Asus Store"
+        ]
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be3"),
+        "name" : "Adidas Shoes",
+        "price" : 4500,
+        "brand" : "Adidas",
+        "category" : "Shoes",
+        "details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "white",
+                        "gray"
+                ],
+                "type" : [
+                        "sports",
+                        "sneakers"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be4"),
+        "name" : "One Plus 10T",
+        "price" : 50000,
+        "brand" : "One Plus",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "50 mp",
+                "back_camera" : "80 mp",
+                "ram" : [
+                        "8 GB",
+                        "4 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+> db.products.deleteOne();
+uncaught exception: Error: find() requires query criteria :
+Bulk/this.find@src/mongo/shell/bulk_api.js:804:23
+DBCollection.prototype.deleteOne@src/mongo/shell/crud_api.js:363:20
+@(shell):1:1
+> db.products.delete({"name" : "Apple Iphone 13"});
+uncaught exception: TypeError: db.products.delete is not a function :
+@(shell):1:1
+> db.products.deleteOne(({"name" : "Apple Iphone 13"});
+... ;
+... )
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:52
+> db.products.deleteOne({"name" : "Apple Iphone 13"});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.products.find().count();
+3
+> db.products.insertOne({
+...         "name" : "Apple Iphone 13",
+...         "price" : 90000,
+...         "brand" : "Apple",
+...         "category" : "Electronics",
+...         "details" : {
+...             "front_camera" : "10 mp",
+...             "back_camera" : "30 mp",
+...             "ram" : "8 GB",
+...             "memory" : ["64 GB", "128 GB", "256 GB"],
+...             "color" : ["silver", "black", "gold", "gray"]
+...         },
+...         "vendors" : ["Istore", "Zstore", "Xstore"]
+...     });
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6322b87b7d01e3c9bcfb4be5")
+}
+> db.products.find().count();
+4
+> db.products.updateOne({"name" : "Apple Iphone 13"}, {$set : {"price" : 80000}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.products.findOne({"name" : "Apple Iphone 13"});
+{
+        "_id" : ObjectId("6322b87b7d01e3c9bcfb4be5"),
+        "name" : "Apple Iphone 13",
+        "price" : 80000,
+        "brand" : "Apple",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "10 mp",
+                "back_camera" : "30 mp",
+                "ram" : "8 GB",
+                "memory" : [
+                        "64 GB",
+                        "128 GB",
+                        "256 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+> db.products.find().forEach((document) => {printjson(document)});
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be2"),
+        "name" : "Asus ROG Strix",
+        "price" : 150000,
+        "brand" : "Asus",
+        "category" : "Electronics",
+        "details" : {
+                "ram" : [
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "1 TB",
+                        "2 TB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Y Store",
+                "Asus Store"
+        ]
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be3"),
+        "name" : "Adidas Shoes",
+        "price" : 4500,
+        "brand" : "Adidas",
+        "category" : "Shoes",
+        "details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "white",
+                        "gray"
+                ],
+                "type" : [
+                        "sports",
+                        "sneakers"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be4"),
+        "name" : "One Plus 10T",
+        "price" : 50000,
+        "brand" : "One Plus",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "50 mp",
+                "back_camera" : "80 mp",
+                "ram" : [
+                        "8 GB",
+                        "4 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+{
+        "_id" : ObjectId("6322b87b7d01e3c9bcfb4be5"),
+        "name" : "Apple Iphone 13",
+        "price" : 80000,
+        "brand" : "Apple",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "10 mp",
+                "back_camera" : "30 mp",
+                "ram" : "8 GB",
+                "memory" : [
+                        "64 GB",
+                        "128 GB",
+                        "256 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+> db.products.find({"brand":"Electronics"}).pretty()
+> db.products.find({"category":"Electronics"}).pretty()
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be2"),
+        "name" : "Asus ROG Strix",
+        "price" : 150000,
+        "brand" : "Asus",
+        "category" : "Electronics",
+        "details" : {
+                "ram" : [
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "1 TB",
+                        "2 TB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Y Store",
+                "Asus Store"
+        ]
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be4"),
+        "name" : "One Plus 10T",
+        "price" : 50000,
+        "brand" : "One Plus",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "50 mp",
+                "back_camera" : "80 mp",
+                "ram" : [
+                        "8 GB",
+                        "4 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+{
+        "_id" : ObjectId("6322b87b7d01e3c9bcfb4be5"),
+        "name" : "Apple Iphone 13",
+        "price" : 80000,
+        "brand" : "Apple",
+        "category" : "Electronics",
+        "details" : {
+                "front_camera" : "10 mp",
+                "back_camera" : "30 mp",
+                "ram" : "8 GB",
+                "memory" : [
+                        "64 GB",
+                        "128 GB",
+                        "256 GB"
+                ],
+                "color" : [
+                        "silver",
+                        "black",
+                        "gold",
+                        "gray"
+                ]
+        },
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+> db.products.find({"category":"Electronics"}, {"name" : 1, "price" : 1}).pretty()
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be2"),
+        "name" : "Asus ROG Strix",
+        "price" : 150000
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be4"),
+        "name" : "One Plus 10T",
+        "price" : 50000
+}
+{
+        "_id" : ObjectId("6322b87b7d01e3c9bcfb4be5"),
+        "name" : "Apple Iphone 13",
+        "price" : 80000
+}
+> db.products.find({"category":"Electronics"}, {"name" : 1, "price" : 2}).pretty()
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be2"),
+        "name" : "Asus ROG Strix",
+        "price" : 150000
+}
+{
+        "_id" : ObjectId("6322b6e17d01e3c9bcfb4be4"),
+        "name" : "One Plus 10T",
+        "price" : 50000
+}
+{
+        "_id" : ObjectId("6322b87b7d01e3c9bcfb4be5"),
+        "name" : "Apple Iphone 13",
+        "price" : 80000
+}
+> db.products.find({"category":"Electronics"}, {_id:0, "name" : 1, "price" : 1}).pretty()
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "One Plus 10T", "price" : 50000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+> db.products.find({"category":"Electronics"}, {_id:0, "name" : 1, "price" : 1, "vendors":1}).pretty()
+{
+        "name" : "Asus ROG Strix",
+        "price" : 150000,
+        "vendors" : [
+                "Y Store",
+                "Asus Store"
+        ]
+}
+{
+        "name" : "One Plus 10T",
+        "price" : 50000,
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+{
+        "name" : "Apple Iphone 13",
+        "price" : 80000,
+        "vendors" : [
+                "Istore",
+                "Zstore",
+                "Xstore"
+        ]
+}
+> db.products.find({"category":"Electronics"}, {_id:0, "name" : 1, "price" : 1}).pretty()
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "One Plus 10T", "price" : 50000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+> db.products.find({"category":"Electronics"}, {_id:0, "name" : 1, "price" : 1, "ram" : 1}).pretty()
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "One Plus 10T", "price" : 50000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+> db.products.find({"category":"Electronics"}, {_id:0, "name" : 1, "price" : 1, "details.ram" : 1}).pretty()
+{
+        "name" : "Asus ROG Strix",
+        "price" : 150000,
+        "details" : {
+                "ram" : [
+                        "16 GB",
+                        "32 GB"
+                ]
+        }
+}
+{
+        "name" : "One Plus 10T",
+        "price" : 50000,
+        "details" : {
+                "ram" : [
+                        "8 GB",
+                        "4 GB"
+                ]
+        }
+}
+{
+        "name" : "Apple Iphone 13",
+        "price" : 80000,
+        "details" : {
+                "ram" : "8 GB"
+        }
+}
+>
+>
+>
+> db.products.findOne({"brand" : "Apple"}).vendors[0];
+Istore
+> db.products.findOne({"brand" : "Apple"}).vendors[1];
+Zstore
+> db.products.findOne({"brand" : "Apple"}).vendors[2];
+Xstore
+>
+> db.products.find({$or : [{"brand" : "Apple"}, {"brand" : "Asus"}]}, {_id : 0, name : 1, price : 1}).pretty()
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+> db.products.find({$or : [{"brand" : "Apple"}, {"price" : {$gt : 50000}]}, {_id : 0, name : 1, price : 1}).pretty()
+... )
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:70
+> db.products.find({$or : [{"brand" : "Apple"}, {"price" : {$gt : 50000}}]}, {_id : 0, name : 1, price : 1}).pretty()
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+> db.products.find({$and : [{"brand" : "Apple"}, {"price" : {$gt : 50000}}]}, {_id : 0, name : 1, price : 1}).pretty()
+{ "name" : "Apple Iphone 13", "price" : 80000 }
+>
