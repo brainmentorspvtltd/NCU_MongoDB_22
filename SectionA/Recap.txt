@@ -718,4 +718,6 @@ uncaught exception: SyntaxError: missing } after property list :
 { "name" : "Apple Iphone 13", "price" : 80000 }
 > db.products.find({$and : [{"brand" : "Apple"}, {"price" : {$gt : 50000}}]}, {_id : 0, name : 1, price : 1}).pretty()
 { "name" : "Apple Iphone 13", "price" : 80000 }
->
+> db.products.find({$or : [{"brand" : "Apple"}, {"price" : {$gt : 50000}}]}, {_id : 0, name : 1, price : 1}).sort({price : -1});
+{ "name" : "Asus ROG Strix", "price" : 150000 }
+{ "name" : "Apple Iphone 13", "price" : 80000 }
