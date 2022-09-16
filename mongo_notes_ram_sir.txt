@@ -1,0 +1,186 @@
+NCU Today Agenda
+mongodb+srv://ram:R3fePYkwWrMNSkXf@cluster0.ipuys.mongodb.net/test
+
+1. Important Queries using Different types of Mongodb Operators
+2. Relationship 
+	One to one - embedded 
+	One to one - relation
+	One to many- Embedded
+	One to many - relation
+	many to many - embedded 
+	many to many - Relation
+
+$Lookups in relation collections
+
+Recape:
+
+Insert 
+ db.products.insertOne(
+   {
+     _id: 100,
+     quantity: 250,
+     instock: true,
+     reorder: false,
+     details: { model: "14QQ", make: "Clothes Corp" },
+     tags: [ "apparel", "clothing" ],
+     ratings: [ { by: "Customer007", rating: 4 } ]
+   }
+)
+
+UpdateOne $set
+db.products.updateOne(
+   { _id: 100 },
+   { $set:
+      {
+        quantity: 500,
+        details: { model: "2600", make: "Fashionaires" },
+        tags: [ "coats", "outerwear", "clothing" ]
+      }
+   }
+)
+
+Set Fields in Embedded Documents
+￼
+db.products.updateOne(
+   { _id: 100 },
+   { $set: { "details.make": "Kustom Kidz" } }
+)
+
+Set Elements in Arrays
+
+
+db.products.updateOne(
+   { _id: 100 },
+   { $set:
+      {
+        "tags.1": "rain gear",
+        "ratings.0.rating": 2
+      }
+   }
+)
+
+$addToSet used on array
+
+The operator adds a value to an array unless the value is already present
+￼
+ db.alphabet.insertOne( { _id: 1, letters: ["a", "b"] } )
+
+
+db.alphabet.updateOne(
+   { _id: 1 },
+   { $addToSet: { letters: [ "c", "d" ] } }
+)
+
+￼
+ $unset
+ operator deletes a particular field. Consider the following syntax:
+db.products.insertMany( [
+   { "item": "chisel", "sku": "C001", "quantity": 4, "instock": true },
+   { "item": "hammer", "sku": "unknown", "quantity": 3, "instock": true },
+   { "item": "nails", "sku": "unknown", "quantity": 100, "instock": true }
+] )
+
+db.products.updateOne(
+   { sku: "unknown" },
+   { $unset: { quantity: "", instock: "" } }
+)
+
+  Update with Aggregation Pipeline Using Existing Fields
+￼
+
+
+db.members.insertMany( [
+   { "_id" : 1, "member" : "abc123", "status" : "A", "points" : 2, "misc1" : "note to self: confirm status", "misc2" : "Need to activate", "lastUpdate" : ISODate("2019-01-01T00:00:00Z") },
+   { "_id" : 2, "member" : "xyz123", "status" : "A", "points" : 60, "misc1" : "reminder: ping me at 100pts", "misc2" : "Some random comment", "lastUpdate" : ISODate("2019-01-01T00:00:00Z") }
+] )
+
+db.members.updateMany(
+   { },
+   [
+      { $set: { status: "Modified", comments: [ "$misc1", "$misc2" ], lastUpdate: "$$NOW" } },
+      { $unset: [ "misc1", "misc2" ] }
+   ]
+)
+Filtering
+
+Find by Nested Key value:
+{"subion_items.catalog_item_id":"46cc26bf-6110-4ddf-960d-63069534c2f9"}
+
+$and Operator 
+{$and:[{"subion_items.level":1}]}
+
+Given collection products({title:””, price:”199”, des:””,})
+Find all records where price not equal to 199, 
+db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
+
+
+db.inventory.find( {
+    $and: [
+        { $or: [ { qty: { $lt : 10 } }, { qty : { $gt: 50 } } ] },
+        { $or: [ { sale: true }, { price : { $lt : 5 } } ] }
+    ]
+} )
+
+￼
+
+
+
+
+
+
+
+
+Exercises-1:
+
+1. Create a database with name my school
+2. Insert a new student with name: Mary, age:20, hobbies, address with city state country latitude, longitude coordinates
+
+Exercise:-2:
+1. Insert a student with about fields with id =STU001
+
+Exercise:-3:
+1. Find a student with a single attribute e.g. name
+
+Exercise:-4
+1. Find a student with city
+
+Exercise:-5
+
+1. Find a student with $and operator
+
+Exercise :-6
+1. Find a student with $or operator with multiple conditions
+
+Exercise:-7
+1. Search for student that has age between 20 and 25
+
+
+Exercise : -8 
+1. Update students collection with score field midterm score and final term score
+
+Exercise: - 9
+1. Search for students that have scored between [50,80) in midterm AND [80,100] in final exame
+
+
+Exercise: -10
+1. Increment the score by 10 inside student collection
+
+
+Exercise: -11
+1. Update the hobbies of every student with eating value
+
+Exercise : 12
+1. Delete a user by id
+2. Delete all users which has hobbies cricket
+
+Exercises: 13
+1. Delete students collection
+2. Delete my school database
+
+
+ 
+https://codeyourfuture.github.io/syllabus-master/others/mongodb-101.html
+
+
+
+
