@@ -39,3 +39,2017 @@ Operators
 
 
 
+> db.createCollection("top_5_customers", {capped:true, size:1024, max:5});
+{ "ok" : 1 }
+> db.top_5_customers.insertOne({name : "John", email : "john@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323fe9d4220803632b0c3b3")
+}
+> db.top_5_customers.insertOne({name : "Sam", email : "sam@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323feba4220803632b0c3b4")
+}
+> db.top_5_customers.insertOne({name : "Nick", email : "nick@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323fec24220803632b0c3b5")
+}
+> db.top_5_customers.insertOne({name : "Tom", email : "tom@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323fec94220803632b0c3b6")
+}
+> db.top_5_customers.insertOne({name : "Adam", email : "adam@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323fed24220803632b0c3b7")
+}
+> db.top_5_customers.find().count();
+5
+> db.top_5_customers.find();
+{ "_id" : ObjectId("6323fe9d4220803632b0c3b3"), "name" : "John", "email" : "john@gmail.com" }
+{ "_id" : ObjectId("6323feba4220803632b0c3b4"), "name" : "Sam", "email" : "sam@gmail.com" }
+{ "_id" : ObjectId("6323fec24220803632b0c3b5"), "name" : "Nick", "email" : "nick@gmail.com" }
+{ "_id" : ObjectId("6323fec94220803632b0c3b6"), "name" : "Tom", "email" : "tom@gmail.com" }
+{ "_id" : ObjectId("6323fed24220803632b0c3b7"), "name" : "Adam", "email" : "adam@gmail.com" }
+> db.top_5_customers.insertOne({name : "Steve", email : "steve@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323feff4220803632b0c3b8")
+}
+> db.top_5_customers.find();
+{ "_id" : ObjectId("6323feba4220803632b0c3b4"), "name" : "Sam", "email" : "sam@gmail.com" }
+{ "_id" : ObjectId("6323fec24220803632b0c3b5"), "name" : "Nick", "email" : "nick@gmail.com" }
+{ "_id" : ObjectId("6323fec94220803632b0c3b6"), "name" : "Tom", "email" : "tom@gmail.com" }
+{ "_id" : ObjectId("6323fed24220803632b0c3b7"), "name" : "Adam", "email" : "adam@gmail.com" }
+{ "_id" : ObjectId("6323feff4220803632b0c3b8"), "name" : "Steve", "email" : "steve@gmail.com" }
+> db.createCollection("users");
+{ "ok" : 1 }
+> db.users.insertOne({name : "Ram", age : 30, salary : 45000.00, eligible : true});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632401d74220803632b0c3b9")
+}
+> db.users.find()
+{ "_id" : ObjectId("632401d74220803632b0c3b9"), "name" : "Ram", "age" : 30, "salary" : 45000, "eligible" : true }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+> db.users.insertOne({name : "Shyam", age : 32, salary : 45000.55, eligible : true});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6324020b4220803632b0c3ba")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+> db.users.insertOne({name : "Kunal", age : 35, salary : 55000.55, dept:null, eligible : true});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632402634220803632b0c3bb")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402634220803632b0c3bb"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+
+> db.users.insertOne({name : "Kunal", age : 35, salary : 55000.55, address :["Delhi", "Noida",]
+> db.users.insertOne({name : "Kunal", age : 35, salary : 55000.55, address :["Delhi", "Noida"]
+> db.users.insertOne({name : "Kunal", age : 35, salary : 55000.55, address :["Delhi", "Noida"]
+>
+>
+>
+>
+> db.users.insertOne({name : "Kunal", age : 35, salary : 55000.55, address :["Delhi", "Noida"]});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632402a94220803632b0c3bc")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402634220803632b0c3bb"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "dept" : null,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402a94220803632b0c3bc"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+> db.users.insertOne({name:"Naman", details : {"phone":9898888789, "address":["Delhi", "Noida"]}, dept:"IT"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632402fe4220803632b0c3bd")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402634220803632b0c3bb"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "dept" : null,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402a94220803632b0c3bc"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+{
+        "_id" : ObjectId("632402fe4220803632b0c3bd"),
+        "name" : "Naman",
+        "details" : {
+                "phone" : 9898888789,
+                "address" : [
+                        "Delhi",
+                        "Noida"
+                ]
+        },
+        "dept" : "IT"
+}
+> var doj = Date();
+> doj
+Fri Sep 16 2022 10:31:50 GMT+0530 (India Standard Time)
+> var doj = new Date();
+> doj
+ISODate("2022-09-16T05:02:15.632Z")
+> var doj = Date();
+> doj
+Fri Sep 16 2022 10:32:26 GMT+0530 (India Standard Time)
+> db.users.insertOne({name:"Naman", doj : doj, dept:"IT"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6324038e4220803632b0c3be")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402634220803632b0c3bb"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "dept" : null,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402a94220803632b0c3bc"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+{
+        "_id" : ObjectId("632402fe4220803632b0c3bd"),
+        "name" : "Naman",
+        "details" : {
+                "phone" : 9898888789,
+                "address" : [
+                        "Delhi",
+                        "Noida"
+                ]
+        },
+        "dept" : "IT"
+}
+{
+        "_id" : ObjectId("6324038e4220803632b0c3be"),
+        "name" : "Naman",
+        "doj" : "Fri Sep 16 2022 10:32:26 GMT+0530 (India Standard Time)",
+        "dept" : "IT"
+}
+> db.users.insertOne({name:"Naman", doj : doj, dept:"IT", min:minKey, max:maxKey});
+uncaught exception: ReferenceError: minKey is not defined :
+@(shell):1:57
+> db.users.insertOne({name:"Naman", doj : doj, dept:"IT", min:minkey, max:maxkey});
+uncaught exception: ReferenceError: minkey is not defined :
+@(shell):1:57
+> db.users.insertOne({name:"Naman", doj : doj, dept:"IT", min:MinKey, max:MaxKey});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632404524220803632b0c3bf")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("632401d74220803632b0c3b9"),
+        "name" : "Ram",
+        "age" : 30,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324020b4220803632b0c3ba"),
+        "name" : "Shyam",
+        "age" : 32,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402634220803632b0c3bb"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "dept" : null,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402a94220803632b0c3bc"),
+        "name" : "Kunal",
+        "age" : 35,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+{
+        "_id" : ObjectId("632402fe4220803632b0c3bd"),
+        "name" : "Naman",
+        "details" : {
+                "phone" : 9898888789,
+                "address" : [
+                        "Delhi",
+                        "Noida"
+                ]
+        },
+        "dept" : "IT"
+}
+{
+        "_id" : ObjectId("6324038e4220803632b0c3be"),
+        "name" : "Naman",
+        "doj" : "Fri Sep 16 2022 10:32:26 GMT+0530 (India Standard Time)",
+        "dept" : "IT"
+}
+{
+        "_id" : ObjectId("632404524220803632b0c3bf"),
+        "name" : "Naman",
+        "doj" : "Fri Sep 16 2022 10:32:26 GMT+0530 (India Standard Time)",
+        "dept" : "IT",
+        "min" : { "$minKey" : 1 },
+        "max" : { "$maxKey" : 1 }
+}
+> db.products.find();
+> db.products.insertMany([
+...     {
+...         "p_name" : "Apple Iphone 13",
+...         "p_price" : 80000,
+...         "p_brand" : "Apple",
+...         "p_category" : "Mobile",
+...         "p_details" : {
+...             "ram" : ["4 GB","8 GB", "16 GB"],
+...             "memory" : ["64 GB", "128 GB"],
+...             "color" : ["white", "gray", "silver", "gold"]
+...         },
+...         "discount" : 5
+...     },
+...
+...     {
+...         "p_name" : "Apple Macbook Pro",
+...         "p_price" : 150000,
+...         "p_brand" : "Apple",
+...         "p_category" : "Laptop",
+...         "p_details" : {
+...             "ram" : ["8 GB", "16 GB", "32 GB"],
+...             "memory" : ["256 GB", "512 GB"],
+...             "color" : ["gray", "silver"]
+...         }
+...     },
+...
+...     {
+...         "p_name" : "Adidas Shoes",
+...         "p_price" : 4000,
+...         "p_brand" : "Adidas",
+...         "p_category" : "Shoes",
+...         "p_details" : {
+...             "size" : [7,8,9,10],
+...             "color" : ["white", "gray", "black", "red"]
+...         },
+...         "discount" : 3,
+...         "offers" : ["offer_1", "offer_2", "offer_3"]
+...     },
+...
+...     {
+...         "p_name" : "Puma Shoes",
+...         "p_price" : 3500,
+...         "p_brand" : "Puma",
+...         "p_category" : "Shoes",
+...         "p_details" : {
+...             "size" : [7,8,9,10],
+...             "color" : ["white", "gray", "black"]
+...         },
+...         "discount" : 5,
+...         "offers" : ["offer_1", "offer_2", "offer_3"]
+...     },
+...
+...     {
+...         "p_name" : "Titan Smart Watch",
+...         "p_price" : 8000,
+...         "p_brand" : "Titan",
+...         "p_category" : "Watch",
+...         "p_details" : {
+...             "features" : ["heartbeat", "steps", "calories", "BMI"],
+...             "color" : ["white", "gray", "silver", "black", "pink"]
+...         },
+...         "discount" : 5
+...     }
+... ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6324083d4220803632b0c3c0"),
+                ObjectId("6324083d4220803632b0c3c1"),
+                ObjectId("6324083d4220803632b0c3c2"),
+                ObjectId("6324083d4220803632b0c3c3"),
+                ObjectId("6324083d4220803632b0c3c4")
+        ]
+}
+> db.products.find().count();
+5
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 80000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 3,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 5,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c4"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.findOne();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 80000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.update({"p_name" : "Apple Iphone 13"}, {$set : {"p_price" : 75000}));
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:78
+> db.products.update({"p_name" : "Apple Iphone 13"}, {$set : {"p_price" : 75000}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.products.findOne();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.update({"p_brand" : "Apple"}, {$set : {"rating" : 4.5}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 5,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 3,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 5,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c4"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.updateMany({"p_brand" : "Apple"}, {$set : {"rating" : 4.5}});
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 1 }
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 5,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 3,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 5,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c4"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.updateMany({}, {$set : {"discount" : 4}});
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 4,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5,
+        "discount" : 4
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c4"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 4
+}
+> db.products.deleteOne({"p_brand" : "Titan"});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 4,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5,
+        "discount" : 4
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+> db.products.insertOne({
+...         "p_name" : "Titan Smart Watch",
+...         "p_price" : 8000,
+...         "p_brand" : "Titan",
+...         "p_category" : "Watch",
+...         "p_details" : {
+...             "features" : ["heartbeat", "steps", "calories", "BMI"],
+...             "color" : ["white", "gray", "silver", "black", "pink"]
+...         },
+...         "discount" : 5
+...     });
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("63240ca74220803632b0c3c5")
+}
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 4,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5,
+        "discount" : 4
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.find({"p_brand" : "Apple"}, {"p_name" : 1, "p_price" : 1, "p_brand" : 1}).pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple"
+}
+> db.products.find({"p_brand" : "Apple"}, {_id : 0, "p_name" : 1, "p_price" : 1, "p_brand" : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_brand" : "Apple"}, {_id : 0, "p_name" : 1, "p_price" : 1, "p_brand" : 1, "size" : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_brand" : "Apple"}, {_id : 0, "p_name" : 1, "p_price" : 1, "p_brand" : 1, "color" : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_brand" : "Apple"}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty();
+{
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        }
+}
+{
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        }
+}
+> db.products.findOne({"p_brand" : "Apple"}, {"_id" : 0, "p_name" : 1, p_brand : 1});
+{ "p_name" : "Apple Iphone 13", "p_brand" : "Apple" }
+> db.products.findOne({"p_brand" : "Apple"}, {"_id" : 0, "p_name" : 1, p_brand : 1}).offers
+> db.products.findOne({}, {"_id" : 0, "p_name" : 1, p_brand : 1}).offers
+> db.products.findOne({}, {"_id" : 0, "p_name" : 1, p_brand : 1}).offers
+>
+>
+>
+>
+> db.products.findOne({"p_brand" : "Shoes"}, {"_id" : 0, "p_name" : 1, p_brand : 1}).offers
+uncaught exception: TypeError: db.products.findOne(...) is null :
+@(shell):1:1
+> db.products.findOne({"p_brand" : "Puma"}, {"_id" : 0, "p_name" : 1, p_brand : 1}).offers
+> db.products.findOne({"p_brand" : "Puma"}).offers
+[ "offer_1", "offer_2", "offer_3" ]
+> db.products.findOne({"p_brand" : "Puma"}).p_brand
+Puma
+> db.products.findOne({"p_brand" : "Puma"}).offers
+[ "offer_1", "offer_2", "offer_3" ]
+> db.products.findOne({"p_brand" : "Puma"}).offers[0]
+offer_1
+> db.products.findOne({"p_brand" : "Puma"}).offers[1]
+offer_2
+> db.products.findOne({"p_brand" : "Puma"}).p_details
+{
+        "size" : [
+                7,
+                8,
+                9,
+                10
+        ],
+        "color" : [
+                "white",
+                "gray",
+                "black"
+        ]
+}
+> db.products.findOne({"p_brand" : "Puma"}).p_details.size
+[ 7, 8, 9, 10 ]
+> db.products.findOne({"p_brand" : "Puma"}).p_details.size[0]
+7
+>
+> db.products.find({"p_brand" : "Apple"}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_brand" : {$eq : "Apple"}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_brand" : {$ne : "Apple"}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Adidas Shoes", "p_price" : 4000, "p_brand" : "Adidas" }
+{ "p_name" : "Puma Shoes", "p_price" : 3500, "p_brand" : "Puma" }
+{ "p_name" : "Titan Smart Watch", "p_price" : 8000, "p_brand" : "Titan" }
+> db.products.find({"p_price" : {$gt : 50000}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+> db.products.find({"p_price" : {$gt : 5000}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+{ "p_name" : "Titan Smart Watch", "p_price" : 8000, "p_brand" : "Titan" }
+> db.products.find({"p_price" : {$gte : 5000}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Apple Iphone 13", "p_price" : 75000, "p_brand" : "Apple" }
+{ "p_name" : "Apple Macbook Pro", "p_price" : 150000, "p_brand" : "Apple" }
+{ "p_name" : "Titan Smart Watch", "p_price" : 8000, "p_brand" : "Titan" }
+> db.products.find({"p_price" : {$lt : 5000}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty();
+{ "p_name" : "Adidas Shoes", "p_price" : 4000, "p_brand" : "Adidas" }
+{ "p_name" : "Puma Shoes", "p_price" : 3500, "p_brand" : "Puma" }
+> db.products.find({"p_details.size" : {$lt : 10}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1, "p_details.size":1}).pretty();
+{
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ]
+        }
+}
+{
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ]
+        }
+}
+> db.products.find({"p_details.size" : {$lt : 8}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1, "p_details.size":1}).pretty();
+{
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ]
+        }
+}
+{
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ]
+        }
+}
+>
+>
+>
+> db.products.find({"p_brand" : {$in : "Puma"}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "$in needs an array",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.products.find({"p_brand" : {$in : ["Puma"]}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty()
+{ "p_name" : "Puma Shoes", "p_price" : 3500, "p_brand" : "Puma" }
+> db.products.find({"p_brand" : {$in : ["Puma", "Adidas"]}}, {_id : 0, "p_name" : 1, p_price : 1, p_brand : 1}).pretty()
+{ "p_name" : "Adidas Shoes", "p_price" : 4000, "p_brand" : "Adidas" }
+{ "p_name" : "Puma Shoes", "p_price" : 3500, "p_brand" : "Puma" }
+> db.products.find({"p_details.color" : {$in : ["Red"]}}, {"p_name" : 1, p_price : 1, p_brand : 1}).pretty()
+>
+>
+> db.products.find().pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 4,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5,
+        "discount" : 4
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+                "features" : [
+                        "heartbeat",
+                        "steps",
+                        "calories",
+                        "BMI"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        },
+        "discount" : 5
+}
+> db.products.find({"p_details.color" : {$in : ["red"]}}, {"p_name" : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas"
+}
+> db.products.find({"p_details.color" : {$in : ["red"]}}, {"p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        }
+}
+> db.products.find({"p_details.color" : {$in : ["white"]}}, {"p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        }
+}
+> db.products.find({"p_details.color" : {$in : ["white","red"]}}, {"p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        }
+}
+> db.products.find({"p_details.color" : {$in : ["white","black"]}}, {"p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        }
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_details" : {
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "black",
+                        "pink"
+                ]
+        }
+}
+> db.products.find({"p_details.color" : {$nin : ["white","black"]}}, {"p_name" : 1, p_price : 1, p_brand : 1, "p_details.color" : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_details" : {
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        }
+}
+> db.products.find({"p_brand" : {$in : ["Adidas","Puma"]}}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+>
+> db.products.find({$or : [{p_brand:"Apple"}, {p_price : {$lt : 10000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma"
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan"
+}
+> db.products.find({$or : [{p_brand:"Puma"}, {p_price : {$lt : 10000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma"
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan"
+}
+> db.products.find({$and : [{p_brand:"Puma"}, {p_price : {$lt : 10000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma"
+}
+> db.products.find({$and : [{p_brand:"Apple"}, {p_price : {$lt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+> db.products.find({$and : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple"
+}
+> db.products.find({$not : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $not. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.products.find({$nor : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas"
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma"
+}
+{
+        "_id" : ObjectId("63240ca74220803632b0c3c5"),
+        "p_name" : "Titan Smart Watch",
+
+> db.products.find({$nor : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+> db.products.find({$not : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+> db.products.find({$and : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+> db.products.find({$not : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+> db.products.find({$nor : [{p_brand:"Apple"}, {p_price : {$gt : 50000}}] },{p_name : 1, p_price : 1, p_brand : 1}).pretty()
+>
+>
+>
+>
+>
+>
+> db.products.find().limit(2).pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c0"),
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 75000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+                "ram" : [
+                        "4 GB",
+                        "8 GB",
+                        "16 GB"
+                ],
+                "memory" : [
+                        "64 GB",
+                        "128 GB"
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "silver",
+                        "gold"
+                ]
+        },
+        "discount" : 4,
+        "rating" : 4.5
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c1"),
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+                "ram" : [
+                        "8 GB",
+                        "16 GB",
+                        "32 GB"
+                ],
+                "memory" : [
+                        "256 GB",
+                        "512 GB"
+                ],
+                "color" : [
+                        "gray",
+                        "silver"
+                ]
+        },
+        "rating" : 4.5,
+        "discount" : 4
+}
+> db.products.find().skip(2).limit(2).pretty();
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c2"),
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black",
+                        "red"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+{
+        "_id" : ObjectId("6324083d4220803632b0c3c3"),
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+                "size" : [
+                        7,
+                        8,
+                        9,
+                        10
+                ],
+                "color" : [
+                        "white",
+                        "gray",
+                        "black"
+                ]
+        },
+        "discount" : 4,
+        "offers" : [
+                "offer_1",
+                "offer_2",
+                "offer_3"
+        ]
+}
+>
