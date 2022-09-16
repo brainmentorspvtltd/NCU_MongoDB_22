@@ -1,0 +1,41 @@
+Collections
+
+db.createCollection("name", options)
+
+Capped Collection
+capped : true,
+size : bytes, max size in bytes allowed in our collection
+max : int, max documents allowed in our collection
+AutoIndexId : automatically creates index on Id Field
+
+Data Types
+
+CRUD Operations - Create Read Update Delete
+CREATE
+ - insertOne, insertMany
+READ
+- find, findOne
+UPDATE
+- updateOne, updateMany, replace
+DELETE
+- deleteOne, deleteMany
+
+
+Operators
+- Projection Operators
+  - $, $elemMatch, $meta, $slice
+- Comparison Operators
+  - $eq, $ne, $gt, $gte, $lt, $lte, $in, $nin
+- Logical Operators
+  - $and, $or, $not, $nor
+- Element Operators
+  - $exists, $type
+- Evaluation Operators
+  - $expr, $regex, $text, $mod, $where
+
+
+
+
+
+
+
