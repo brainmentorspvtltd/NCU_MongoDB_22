@@ -52,5 +52,22 @@
             "color" : ["silver", "black", "gold", "gray"]
         },
         "vendors" : ["Istore", "Zstore", "Xstore"]
+    },
+    {
+        "name" : "Samsung Galaxy S21",
+        "price" : 35000,
+        "brand" : "Samsung",
+        "category" : "Electronics",
+        "details" : {
+            "front_camera" : "32 mp",
+            "back_camera" : "12 mp + 12 mp + 8 mp",
+            "ram" : ["8 GB", "4 GB"],
+            "memory" : ["128 GB", "256 GB"],
+            "color" : ["silver", "black", "gold", "gray"],
+            "battery" : 4500
+        },
+        "vendors" : ["Istore", "Zstore", "Xstore"],
+        "discount" : 4.5,
+        "offers" : ["offer_1", "offer_2"]
     }
 ]
