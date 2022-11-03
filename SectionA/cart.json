@@ -1,51 +1,54 @@
 [
     {
-        "_id": "1",
-        "email": "john@gmail.com",
-        "product_id": "1",
-        "qty" : 2,
-        "total" : 1000
+        "email": "john12@gmail.com",
+        "items" : [
+            {
+                "product_id": 1001,
+                "qty" : 2
+            },
+            {
+                "product_id": 1002,
+                "qty" : 1
+            }
+        ]
     },
+
     {
-        "_id": "2",
-        "email": "smith12@gmail.com",
-        "product_id": "1",
-        "qty" : 1,
-        "total" : 500
+        "email": "smith01@gmail.com",
+        "items" : [
+            {
+                "product_id": 1003,
+                "qty" : 1
+            }
+        ]
     },
+
     {
-        "_id": "3",
-        "email": "tom99@gmail.com",
-        "product_id": "2",
-        "qty" : 1,
-        "total" : 5500
+        "email": "john112@gmail.com",
+        "items" : [
+            {
+                "product_id": 1004,
+                "qty" : 2
+            },
+            {
+                "product_id": 1001,
+                "qty" : 1
+            }
+        ]
     },
+
     {
-        "_id": "4",
-        "email": "nick11@gmail.com",
-        "product_id": "101",
-        "qty" : 4,
-        "total" : 25000
-    },
-    {
-        "_id": "5",
-        "email": "adam@gmail.com",
-        "product_id": "101",
-        "qty" : 1,
-        "total" : 7000
-    },
-    {
-        "_id": "6",
-        "email": "steve101@gmail.com",
-        "product_id": "5",
-        "qty" : 1,
-        "total" : 2500
-    },
-    {
-        "_id": "7",
-        "email": "john77@gmail.com",
-        "product_id": "11",
-        "qty" : 1,
-        "total" : 10500
+        "email": "nick15@gmail.com",
+        "items" : [
+            {
+                "product_id": 1003,
+                "qty" : 2
+            },
+            {
+                "product_id": 1002,
+                "qty" : 1
+            }
+        ]
     }
+    
 ]

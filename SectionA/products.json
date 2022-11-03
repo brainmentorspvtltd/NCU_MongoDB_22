@@ -1,5 +1,6 @@
 [
     {
+        "p_id" : 1001,
         "name" : "Apple Iphone 13",
         "price" : 90000,
         "brand" : "Apple",
@@ -15,6 +16,7 @@
     },
 
     {
+        "p_id" : 1002,
         "name" : "Asus ROG Strix",
         "price" : 150000,
         "brand" : "Asus",
@@ -28,6 +30,7 @@
     },
 
     {
+        "p_id" : 1003,
         "name" : "Adidas Shoes",
         "price" : 4500,
         "brand" : "Adidas",
@@ -40,6 +43,7 @@
     },
 
     {
+        "p_id" : 1004,
         "name" : "One Plus 10T",
         "price" : 50000,
         "brand" : "One Plus",
@@ -54,6 +58,7 @@
         "vendors" : ["Istore", "Zstore", "Xstore"]
     },
     {
+        "p_id" : 1005,
         "name" : "Samsung Galaxy S21",
         "price" : 35000,
         "brand" : "Samsung",
@@ -69,5 +74,19 @@
         "vendors" : ["Istore", "Zstore", "Xstore"],
         "discount" : 4.5,
         "offers" : ["offer_1", "offer_2"]
+    },
+    {
+        "p_id" : 1006,
+        "name" : "Mi Tv",
+        "price" : 12999,
+        "brand" : "Mi",
+        "category" : "Electronics",
+        "details" : {
+            "operating_system" : "Android",
+            "color" : "black"
+        },
+        "vendors" : ["Istore", "Zstore", "Xstore"],
+        "discount" : 4.5,
+        "offers" : "offer_1"
     }
 ]
